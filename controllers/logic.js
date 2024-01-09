@@ -80,8 +80,12 @@ exports.assembli_Desc_Add = async(req,res)=>{
 
 //get All categories
 exports.get_Categories = async(req,res)=>{
+  const searchkey=req.query.search
+  const query={
+    name:{$regex:searchkey, $options:"i"}
+  }
   try{ 
-   const documents=await categories.find().sort()
+   const documents=await categories.find(query).sort()
    res.status(200).json(documents);
  
    
@@ -94,8 +98,12 @@ exports.get_Categories = async(req,res)=>{
  }
  //get All subcategories
 exports.get_subCategories = async(req,res)=>{
+  const searchkey=req.query.search
+  const query={
+    name:{$regex:searchkey, $options:"i"}
+  }
   try{ 
-   const documents=await subcategories.find().sort()
+   const documents=await subcategories.find(query)
    res.status(200).json(documents);
  
    
@@ -108,8 +116,12 @@ exports.get_subCategories = async(req,res)=>{
  }
   //get All Assemblies
 exports.get_assemblies = async(req,res)=>{
+  const searchkey=req.query.search
+  const query={
+    name:{$regex:searchkey, $options:"i"}
+  }
   try{ 
-   const documents=await assemblies.find().sort()
+   const documents=await assemblies.find(query).sort()
    res.status(200).json(documents);
  
    
